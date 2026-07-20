@@ -1,0 +1,189 @@
+import './main.css'
+
+/* ------------------------------------------------------------------
+   Preloader — favicon mark + counting percentage on a black screen.
+   Counts up while the page loads, then fades out and unlocks scroll
+   as soon as the window `load` event fires.
+------------------------------------------------------------------ */
+const preloader = document.getElementById('preloader')
+if (preloader) {
+  const pctEl = preloader.querySelector('[data-preloader-pct]')
+  let loaded = document.readyState === 'complete'
+  window.addEventListener('load', () => {
+    loaded = true
+  })
+
+  const setPct = (n) => {
+    if (pctEl) pctEl.textContent = n + '%'
+  }
+
+  const finish = () => {
+    setPct(100)
+    preloader.classList.add('preloader--hidden')
+    document.body.classList.remove('preloading')
+    preloader.addEventListener('transitionend', () => preloader.remove(), {
+      once: true,
+    })
+  }
+
+  let pct = 0
+  const tick = () => {
+    if (loaded) {
+      finish()
+      return
+    }
+    // Ease toward 99 while we wait, then snap to 100 the moment we're done.
+    pct = Math.min(99, pct + Math.max(1, Math.round((99 - pct) * 0.08)))
+    setPct(pct)
+    requestAnimationFrame(tick)
+  }
+  requestAnimationFrame(tick)
+}
+
+/* ------------------------------------------------------------------
+   Header scroll state + scroll-reveal animations
+------------------------------------------------------------------ */
+const header = document.getElementById('site-header')
+if (header) {
+  window.addEventListener(
+    'scroll',
+    () => header.classList.toggle('scrolled', window.scrollY > 40),
+    { passive: true }
+  )
+}
+
+const io = new IntersectionObserver(
+  (entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('aos-in')
+        io.unobserve(entry.target)
+      }
+    })
+  },
+  { threshold: 0.12 }
+)
+document.querySelectorAll('[data-aos]').forEach((el) => {
+  const delay = el.getAttribute('data-aos-delay')
+  if (delay) el.style.transitionDelay = delay + 'ms'
+  io.observe(el)
+})
+
+/* ------------------------------------------------------------------
+   FAQ accordion
+------------------------------------------------------------------ */
+window.toggleFaq = function (row) {
+  const isOpen = row.classList.contains('open')
+  document.querySelectorAll('.faq-row').forEach((r) => {
+    r.classList.remove('open')
+    const a = r.querySelector('.faq-a')
+    const icon = r.querySelector('.faq-icon')
+    if (a) a.style.display = 'none'
+    if (icon) icon.innerHTML = '+'
+  })
+  if (!isOpen) {
+    row.classList.add('open')
+    const a = row.querySelector('.faq-a')
+    const icon = row.querySelector('.faq-icon')
+    if (a) a.style.display = ''
+    if (icon) icon.innerHTML = '&minus;'
+  }
+}
+
+/* ------------------------------------------------------------------
+   Mobile menu
+------------------------------------------------------------------ */
+window.toggleMenu = function () {
+  document.body.classList.toggle('menu-open')
+}
+document.addEventListener('click', (e) => {
+  if (
+    document.body.classList.contains('menu-open') &&
+    e.target.closest('#site-nav a')
+  ) {
+    document.body.classList.remove('menu-open')
+  }
+})
+
+/* ------------------------------------------------------------------
+   Forms → contact.php (self-hosted PHP mail handler on cPanel)
+
+   Any <form data-mailform> is submitted with fetch() to contact.php.
+   The handler emails richard@blackseven.co and replies with JSON:
+     { success: boolean, message: string }
+   A [data-form-status] element inside the form shows the result.
+
+   NOTE: PHP only runs on the cPanel server (or a local `php -S` server).
+   During `npm run dev` the request will fail gracefully with an error
+   message — the mail actually sends once deployed to public_html.
+------------------------------------------------------------------ */
+function setStatus(el, message, ok) {
+  if (!el) return
+  el.textContent = message
+  el.style.display = message ? 'block' : 'none'
+  el.style.color = ok ? 'rgba(255,255,255,0.9)' : '#ff9db1'
+}
+
+document.querySelectorAll('form[data-mailform]').forEach((form) => {
+  const statusEl = form.querySelector('[data-form-status]')
+  const submitBtn = form.querySelector('[type="submit"]')
+  const defaultLabel = submitBtn ? submitBtn.textContent : ''
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault()
+
+    // Honeypot: if the hidden field is filled, it's a bot — pretend success.
+    const honeypot = form.querySelector('input[name="botcheck"]')
+    if (honeypot && honeypot.checked) {
+      setStatus(statusEl, 'Thanks — your message has been sent.', true)
+      form.reset()
+      return
+    }
+
+    if (submitBtn) {
+      submitBtn.disabled = true
+      submitBtn.textContent = 'Sending…'
+    }
+    setStatus(statusEl, '', true)
+
+    try {
+      const res = await fetch('contact.php', {
+        method: 'POST',
+        body: new FormData(form),
+        headers: { Accept: 'application/json' },
+      })
+      let data = {}
+      try {
+        data = await res.json()
+      } catch {
+        throw new Error('Unexpected response from the server.')
+      }
+
+      if (res.ok && data.success) {
+        setStatus(
+          statusEl,
+          data.message || 'Thanks — your message has been sent.',
+          true
+        )
+        form.reset()
+      } else {
+        setStatus(
+          statusEl,
+          data.message || 'Something went wrong. Please try again.',
+          false
+        )
+      }
+    } catch (err) {
+      setStatus(
+        statusEl,
+        'Could not send right now. Please email richard@blackseven.co directly.',
+        false
+      )
+    } finally {
+      if (submitBtn) {
+        submitBtn.disabled = false
+        submitBtn.textContent = defaultLabel
+      }
+    }
+  })
+})

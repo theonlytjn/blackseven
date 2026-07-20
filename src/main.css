@@ -1,0 +1,269 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ============================================================
+   Base
+   ============================================================ */
+@layer base {
+  html,
+  body {
+    @apply m-0 bg-ink font-sans font-normal text-white;
+  }
+  body {
+    @apply overflow-x-hidden;
+  }
+  a {
+    @apply text-white no-underline;
+  }
+  a:hover {
+    @apply text-white/70;
+  }
+  ::selection {
+    background: rgb(192, 1, 252);
+    color: #fff;
+  }
+}
+
+/* ============================================================
+   Components
+   ============================================================ */
+@layer components {
+  /* Small bracketed label, e.g. "[ Services ]" */
+  .eyebrow {
+    @apply text-[13px] font-medium leading-5 uppercase text-white/70;
+  }
+
+  /* Playfair display accent — italic, lowercase */
+  .pf {
+    @apply font-display italic lowercase tracking-[-1px];
+  }
+
+  /* Frosted glass panel used for cards, the division grid and the form */
+  .card {
+    @apply rounded-card bg-frost/10 backdrop-blur-[40px];
+  }
+
+  /* Navigation links in the fixed header */
+  .nav-link {
+    @apply text-[13px] font-medium uppercase leading-5 text-white/40 transition-colors;
+  }
+  .nav-link:hover,
+  .nav-link[data-active] {
+    @apply text-white;
+  }
+
+  /* Pill button: white label + circular arrow badge */
+  .pill {
+    @apply inline-flex items-center transition-opacity;
+  }
+  .pill:hover {
+    @apply opacity-[0.85] text-white;
+  }
+  .pill__label {
+    @apply flex items-center rounded-[48px] bg-white px-6 py-3 text-sm font-semibold uppercase leading-5 text-ink;
+  }
+  .pill__ico {
+    @apply -ml-1 flex h-[43.19px] w-[43.19px] items-center justify-center rounded-full bg-white;
+  }
+
+  /* Solid white block button (used for "Send message") */
+  .btn-solid {
+    @apply flex cursor-pointer items-center justify-center rounded-card bg-white px-4 py-[14px] text-sm font-semibold uppercase leading-5 text-black transition-opacity hover:opacity-90;
+  }
+
+  /* Division selector cards on the home hero */
+  .division-card {
+    @apply flex flex-col gap-[10px] p-[30px_30px_26px] text-white transition-colors;
+  }
+  .division-card:hover {
+    @apply bg-frost/[0.08] text-white;
+  }
+
+  /* Underlined text link (footer + inline) */
+  .footer-link {
+    @apply inline-flex flex-col gap-1 transition-opacity;
+  }
+  .footer-link:hover {
+    @apply opacity-70 text-white;
+  }
+  .footer-link .label {
+    @apply text-sm uppercase leading-[15.4px];
+  }
+  .footer-link .rule {
+    @apply h-px bg-white/30;
+  }
+
+  /* FAQ accordion rows */
+  .faq-row {
+    @apply flex cursor-pointer flex-col gap-3 rounded-card bg-frost/10 p-[22px_24px] backdrop-blur-[40px] transition-colors;
+  }
+  .faq-row:hover {
+    @apply bg-frost/[0.16];
+  }
+
+  /* Contact form fields */
+  .field {
+    @apply min-w-0 rounded-card border-none bg-transparent px-[13px] py-[14.5px] font-sans text-base text-white outline-none shadow-[inset_0_0_0_1px_rgba(255,255,255,0.5)] placeholder:text-white/40;
+  }
+  .field:focus {
+    @apply shadow-[inset_0_0_0_1px_rgba(255,255,255,0.85)];
+  }
+
+  /* Newsletter fields + button (footer) */
+  .nl-input {
+    @apply min-w-0 rounded-card border border-white/15 bg-frost/[0.06] px-5 py-4 font-sans text-sm text-white outline-none placeholder:text-white/40;
+  }
+  .nl-input:focus {
+    @apply border-white/40;
+  }
+  .nl-btn {
+    @apply cursor-pointer rounded-card border-none bg-frost/[0.12] px-5 py-4 font-sans text-sm font-semibold uppercase tracking-[0.04em] text-white transition-colors hover:bg-frost/20 disabled:cursor-not-allowed disabled:opacity-60;
+  }
+
+  /* Decorative floating cube — background image set inline per instance */
+  .cube {
+    background-position: 50% 50%;
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+  }
+
+  /* Mobile menu button — hidden on desktop */
+  .menu-btn {
+    @apply hidden whitespace-nowrap rounded-card border-none bg-frost/10 px-[18px] py-[14px] font-sans text-sm font-medium uppercase tracking-[0.04em] text-white backdrop-blur-[40px] cursor-pointer;
+  }
+}
+
+/* ============================================================
+   Utilities & one-off backgrounds
+   ============================================================ */
+/* Hero radial glow — purple bleeding into ink from the top-left */
+.radial-hero {
+  background: radial-gradient(
+    1698.117px 1698.117px at 0% 0%,
+    #c001fc 0%,
+    rgb(11, 5, 22) 35%,
+    rgb(11, 5, 22) 100%
+  );
+}
+
+/* Soft screen-blended glow texture layered over the radial */
+.glow-overlay {
+  background: url('/assets/hero-glow.png') 50% 50% / cover no-repeat;
+  opacity: 0.32;
+  mix-blend-mode: screen;
+}
+
+/* ============================================================
+   Preloader — favicon + percentage over a black screen
+   ============================================================ */
+#preloader {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background: #000;
+  transition: opacity 0.6s ease, visibility 0.6s ease;
+}
+#preloader.preloader--hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+.preloader__mark {
+  width: 350px;
+  height: 350px;
+  object-fit: contain;
+  animation: preloader-pulse 1.8s ease-in-out infinite;
+}
+.preloader__pct {
+  @apply font-sans;
+  font-size: 30px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  font-variant-numeric: tabular-nums;
+}
+body.preloading {
+  overflow: hidden;
+}
+@keyframes preloader-pulse {
+  0%, 100% { opacity: 0.5; transform: scale(0.94); }
+  50%      { opacity: 1;   transform: scale(1); }
+}
+@media (max-width: 480px) {
+  .preloader__mark { width: 70vw; height: 70vw; }
+  .preloader__pct  { font-size: 24px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .preloader__mark { animation: none; }
+}
+
+/* ============================================================
+   Scroll-reveal animation
+   ============================================================ */
+[data-aos] {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+[data-aos].aos-in {
+  opacity: 1;
+  transform: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  [data-aos] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* ============================================================
+   Header scroll state + mobile menu overlay
+   ============================================================ */
+#site-header.scrolled {
+  background: #000;
+}
+
+@media (max-width: 760px) {
+  .menu-btn {
+    display: block;
+    position: relative;
+    z-index: 210;
+  }
+  #site-nav {
+    display: none !important;
+  }
+  body.menu-open {
+    overflow: hidden;
+  }
+  body.menu-open #site-nav {
+    display: flex !important;
+    position: fixed;
+    inset: 0;
+    background: rgb(11, 5, 22);
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 36px;
+    z-index: 200;
+  }
+  body.menu-open #site-nav a {
+    font-size: 22px !important;
+    padding: 8px 16px;
+  }
+  body.menu-open #site-header {
+    background: transparent !important;
+  }
+  .cube-inner {
+    display: none;
+  }
+  .cube {
+    opacity: 0.55;
+  }
+}

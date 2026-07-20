@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Seven — A Holding Company</title>
+<link rel="icon" href="/assets/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Playfair+Display:ital@1&display=swap" rel="stylesheet">
+</head>
+<body class="preloading">
+<div id="preloader" aria-hidden="true">
+  <img src="/assets/favicon.png" alt="" class="preloader__mark" width="350" height="350">
+  <span class="preloader__pct" data-preloader-pct>0%</span>
+</div>
+<header id="site-header" class="fixed inset-x-0 top-0 z-[100] flex items-center justify-between px-5 py-4 transition-colors md:px-[72px] md:py-[26px]">
+  <a href="index.html" class="flex items-center"><img src="/assets/main-logo.png" alt="Black Seven" class="block h-auto w-[110px] md:w-[150px]"></a>
+  <button class="menu-btn" onclick="toggleMenu()" aria-label="Menu">[ MENU ]</button>
+  <nav id="site-nav" class="flex gap-8">
+    <a href="index.html" class="nav-link" data-active>Home</a>
+    <a href="consultancy.html" class="nav-link">Consultancy</a>
+    <a href="casa.html" class="nav-link">Casa</a>
+    <a href="contact.html" class="nav-link">Contact</a>
+  </nav>
+</header>
+<main>
+
+<section class="home-hero relative flex min-h-screen flex-col justify-between overflow-hidden">
+  <div class="radial-hero absolute inset-0"></div>
+  <div class="glow-overlay absolute inset-0"></div>
+  <div class="pointer-events-none absolute inset-0 overflow-hidden">
+    <div class="cube absolute right-[1%] top-[12%] aspect-square w-[min(28vw,400px)]" style="background-image:url('/assets/cube-2.png')"></div>
+    <div class="cube cube-inner absolute left-[55%] top-[34%] aspect-square w-[min(13vw,185px)]" style="background-image:url('/assets/cube-3.png')"></div>
+    <div class="cube absolute right-[11%] top-[42%] aspect-square w-[min(15vw,215px)]" style="background-image:url('/assets/cube-4.png')"></div>
+    <div class="cube cube-inner absolute left-[53%] top-[58%] aspect-square w-[min(17vw,245px)]" style="background-image:url('/assets/cube-6.png')"></div>
+    <div class="cube absolute right-[13%] top-[70%] aspect-square w-[min(14vw,200px)]" style="background-image:url('/assets/cube-7.png')"></div>
+    <div class="cube cube-inner absolute left-[51%] top-[86%] aspect-square w-[min(13vw,190px)]" style="background-image:url('/assets/cube-1.png')"></div>
+  </div>
+  <div class="relative flex max-w-[640px] flex-col items-start px-5 pt-[146px] md:px-[72px]">
+    <span data-aos class="eyebrow mb-5">[ Welcome to Black Seven Consultancy ]</span>
+    <h1 data-aos data-aos-delay="120" class="m-0 mb-10 font-normal uppercase leading-[1.2] tracking-[-0.4px] text-[clamp(34px,10.5vw,44px)] md:text-[clamp(44px,4.75vw,68px)]">Building<br>businesses<br><span class="pf leading-none">creating value</span></h1>
+    <div data-aos data-aos-delay="240" class="mb-9">
+      <a href="consultancy.html" class="pill"><span class="pill__label">Explore the group</span><span class="pill__ico"><svg width="9" height="9" viewBox="0 0 8.81 8.81" fill="rgb(11,5,22)"><path d="M 7.344 2.502 L 1.036 8.81 L 0 7.774 L 6.308 1.466 L 0.748 1.466 L 0.748 0 L 8.81 0 L 8.81 8.062 L 7.344 8.062 L 7.344 2.502 Z"></path></svg></span></a>
+    </div>
+    <p data-aos data-aos-delay="360" class="m-0 max-w-[440px] text-[15px] uppercase leading-[1.45] text-white/70">Black Seven is the parent brand behind a small group of operating businesses, each built on the same principle: patient capital, disciplined execution, long-term value</p>
+  </div>
+  <div data-aos data-aos-delay="200" class="relative flex flex-col gap-4 px-5 pb-[70px] pt-14 md:px-[72px]">
+    <span class="eyebrow">[ Select the area you'd like to explore ]</span>
+    <div class="card grid max-w-[720px] grid-cols-1 cols:grid-cols-2">
+      <a href="consultancy.html" class="division-card rounded-card cols:rounded-r-none">
+        <span class="eyebrow">[ 01 &mdash; Advisory ]</span>
+        <span class="text-[22px] font-normal uppercase leading-[1.2] tracking-[-0.4px]">Black Seven <span class="pf text-[22px]">consultancy</span></span>
+        <span class="text-sm uppercase leading-[1.4] text-white/40">Strategic business consulting focused on growth, operations and business transformation</span>
+        <span class="mt-2 flex flex-col gap-1 self-start"><span class="text-sm uppercase leading-[15.4px]">Enter consultancy</span><span class="h-px bg-white/30"></span></span>
+      </a>
+      <a href="casa.html" class="division-card rounded-card cols:rounded-l-none cols:border-l cols:border-white/20">
+        <span class="eyebrow">[ 02 &mdash; Property ]</span>
+        <span class="text-[22px] font-normal uppercase leading-[1.2] tracking-[-0.4px]">Black Seven <span class="pf text-[22px]">casa</span></span>
+        <span class="text-sm uppercase leading-[1.4] text-white/40">Residential property investment and long-term portfolio growth</span>
+        <span class="mt-2 flex flex-col gap-1 self-start"><span class="text-sm uppercase leading-[15.4px]">Enter casa</span><span class="h-px bg-white/30"></span></span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section class="bg-black px-5 pb-[150px] pt-[130px] md:px-[72px]">
+  <div class="mx-auto grid max-w-content grid-cols-1 gap-20 cols:grid-cols-[minmax(300px,450px)_1fr]">
+    <div data-aos class="flex flex-col gap-[90px]">
+      <span class="eyebrow">[ About Black Seven ]</span>
+      <div class="relative h-[500px] w-full overflow-hidden rounded-card">
+        <img src="/assets/user-founder-image.webp" alt="Founder" class="block h-full w-full object-cover">
+        <a href="contact.html" class="pill absolute bottom-10 left-1/2 -translate-x-1/2"><span class="pill__label whitespace-nowrap">Talk to us</span><span class="pill__ico"><svg width="9" height="9" viewBox="0 0 8.81 8.81" fill="rgb(11,5,22)"><path d="M 7.344 2.502 L 1.036 8.81 L 0 7.774 L 6.308 1.466 L 0.748 1.466 L 0.748 0 L 8.81 0 L 8.81 8.062 L 7.344 8.062 L 7.344 2.502 Z"></path></svg></span></a>
+      </div>
+    </div>
+    <div data-aos data-aos-delay="150" class="flex flex-col items-start">
+      <h2 class="m-0 mb-[72px] font-normal uppercase leading-[1.23] tracking-[-0.4px] text-[clamp(26px,7.5vw,34px)] md:text-[clamp(32px,3.4vw,48px)]">One <span class="text-white/45">holding company.</span> A small number <span class="text-white/45">of deliberate</span> businesses.</h2>
+      <p class="m-0 mb-5 max-w-[520px] text-base uppercase leading-[1.45]">Black Seven was built on a simple idea: rather than being one company doing many things, it's a small group of focused businesses, each run on its own terms, under one name and one standard</p>
+      <p class="m-0 mb-7 max-w-[520px] text-base uppercase leading-[1.45] text-white/70">Every division shares the same operating philosophy &mdash; careful diagnosis before action, disciplined execution, and a preference for compounding value over quick wins</p>
+      <div class="mt-auto flex items-center gap-4 pt-16">
+        <div class="flex">
+          <img src="/assets/user-avatar-1.webp" alt="" class="h-12 w-12 rounded-full border-2 border-black object-cover">
+          <img src="/assets/user-avatar-2.webp" alt="" class="-ml-[14px] h-12 w-12 rounded-full border-2 border-black object-cover">
+          <img src="/assets/user-avatar-3.webp" alt="" class="-ml-[14px] h-12 w-12 rounded-full border-2 border-black object-cover">
+          <img src="/assets/user-avatar-4.webp" alt="" class="-ml-[14px] h-12 w-12 rounded-full border-2 border-black object-cover">
+        </div>
+        <span class="text-sm uppercase leading-[1.4] text-white/70">Building businesses for the long term</span>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- ===================== FOOTER ===================== -->
+<div class="relative overflow-hidden bg-black">
+  <div class="footer-circle absolute left-[-533px] top-[30px] h-[843px] w-[864px] bg-[url('/assets/circle-photo.png')] bg-contain bg-center bg-no-repeat max-md:left-[-200px] max-md:top-auto max-md:bottom-[-80px] max-md:h-[410px] max-md:w-[420px] max-md:opacity-50"></div>
+  <div class="footer-circle absolute right-[-533px] top-[30px] h-[843px] w-[864px] bg-[url('/assets/circle-photo.png')] bg-contain bg-center bg-no-repeat max-md:right-[-200px] max-md:top-auto max-md:bottom-[-80px] max-md:h-[410px] max-md:w-[420px] max-md:opacity-50"></div>
+  <div data-aos class="relative mx-auto flex max-w-[560px] flex-col items-center px-5 pb-[100px] pt-[120px] text-center md:px-[72px] md:pb-[180px] md:pt-[200px]">
+    <span class="mb-11 text-[22px] font-medium uppercase leading-5">&copy;BLACK7</span>
+    <h2 class="m-0 mb-9 font-normal uppercase leading-[1.23] tracking-[-0.4px] text-[clamp(26px,7.5vw,34px)] md:text-[clamp(36px,3.4vw,48px)]">Great businesses <span class="pf">start here</span>. Yours should <span class="pf">too</span>.</h2>
+    <p class="m-0 mb-11 text-lg uppercase leading-[23.4px]">Your business deserves more than attention &mdash; it deserves discipline. Let's build it for the long term</p>
+    <a href="contact.html" class="pill"><span class="pill__label">Start a conversation</span><span class="pill__ico"><svg width="9" height="9" viewBox="0 0 8.81 8.81" fill="rgb(11,5,22)"><path d="M 7.344 2.502 L 1.036 8.81 L 0 7.774 L 6.308 1.466 L 0.748 1.466 L 0.748 0 L 8.81 0 L 8.81 8.062 L 7.344 8.062 L 7.344 2.502 Z"></path></svg></span></a>
+  </div>
+  <div class="relative px-5 pt-[60px] md:px-[72px]">
+    <div data-aos class="mx-auto grid max-w-content grid-cols-1 items-start gap-[60px] cols:grid-cols-[1fr_1fr_1.4fr]">
+      <div class="flex flex-col items-start gap-[14px]">
+        <span class="text-base uppercase leading-[22.4px] text-white/70">General contact</span>
+        <a href="mailto:info@blackseven.co" class="footer-link"><span class="label">info@blackseven.co</span><span class="rule"></span></a>
+        <span class="mt-[14px] text-base uppercase leading-[22.4px] text-white/70">New ventures</span>
+        <a href="mailto:ventures@blackseven.co" class="footer-link"><span class="label">ventures@blackseven.co</span><span class="rule"></span></a>
+        <span class="mt-[14px] text-base uppercase leading-[22.4px] text-white/70">Company information</span>
+        <span class="text-xs uppercase leading-5 text-white/45">Black Seven Consultancy Limited is a company registered in England<br>Company No. 12090749<br><br>Black Seven Casa Limited is a company registered in England<br>Company No. 14130988</span>
+      </div>
+      <div class="flex flex-col items-start gap-[14px]">
+        <span class="text-base uppercase leading-[22.4px] text-white/70">Quick links</span>
+        <a href="index.html" class="footer-link"><span class="label">Home</span><span class="rule"></span></a>
+        <a href="consultancy.html" class="footer-link"><span class="label">Consultancy</span><span class="rule"></span></a>
+        <a href="casa.html" class="footer-link"><span class="label">Casa</span><span class="rule"></span></a>
+        <a href="contact.html" class="footer-link"><span class="label">Contact</span><span class="rule"></span></a>
+      </div>
+      <form data-mailform class="flex flex-col gap-4">
+        <span class="text-base uppercase leading-[22.4px] text-white/70">Join our newsletter</span>
+        <input type="hidden" name="form_type" value="newsletter">
+        <input type="checkbox" name="botcheck" class="hidden" tabindex="-1" autocomplete="off" aria-hidden="true">
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <input name="name" type="text" placeholder="John Doe" class="nl-input" aria-label="Name">
+          <input name="email" type="email" required placeholder="hello@email.com" class="nl-input" aria-label="Email">
+        </div>
+        <button type="submit" class="nl-btn">Subscribe</button>
+        <span data-form-status class="text-xs uppercase leading-[18px]" style="display:none"></span>
+      </form>
+    </div>
+    <div data-aos class="mx-[-20px] mt-[70px] overflow-hidden md:mx-[-72px]">
+      <div class="whitespace-nowrap text-center text-[20.5vw] font-medium uppercase leading-[0.78] tracking-[-0.03em]">&copy;BLACK7</div>
+    </div>
+    <div data-aos class="mx-auto mt-14 flex max-w-content flex-wrap items-center justify-between gap-4 pb-12">
+      <span class="text-sm uppercase leading-5 text-white/70">&copy;Copyright 2026 Black Seven Group. All rights reserved</span>
+      <span class="text-sm uppercase leading-5 text-white/70">[ One name, one standard ]</span>
+    </div>
+  </div>
+</div>
+<script type="module" src="/src/main.js"></script>
+</body>
+</html>
