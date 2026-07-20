@@ -19,3 +19,7 @@ function submitNewsletter(){
   var body='Please add me to the newsletter.\n\nName: '+g('nl-name')+'\nEmail: '+g('nl-email');
   window.location.href='mailto:richard@blackseven.co?subject='+encodeURIComponent('Newsletter signup — Black Seven')+'&body='+encodeURIComponent(body);
 }
+function toggleMenu(){document.body.classList.toggle('menu-open');}
+document.addEventListener('click',function(e){
+  if(document.body.classList.contains('menu-open') && e.target.closest('#site-nav a')) document.body.classList.remove('menu-open');
+});
