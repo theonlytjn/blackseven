@@ -22,12 +22,12 @@ a:hover{color:rgba(255,255,255,0.7);}
 
 
 /* ---------- Mobile menu ---------- */
-.menu-btn{display:none;background:rgba(248,248,243,0.1);backdrop-filter:blur(40px);border:none;border-radius:9.6px;padding:14px 18px;font-family:'Geist',sans-serif;font-size:14px;font-weight:500;text-transform:uppercase;color:#fff;cursor:pointer;letter-spacing:0.04em;}
+.menu-btn{display:none;white-space:nowrap;background:rgba(248,248,243,0.1);backdrop-filter:blur(40px);border:none;border-radius:9.6px;padding:14px 18px;font-family:'Geist',sans-serif;font-size:14px;font-weight:500;text-transform:uppercase;color:#fff;cursor:pointer;letter-spacing:0.04em;}
 @media (max-width:760px){
   .menu-btn{display:block;position:relative;z-index:210;}
-  #site-nav{display:none;}
+  #site-nav{display:none !important;}
   body.menu-open{overflow:hidden;}
-  body.menu-open #site-nav{display:flex;position:fixed;inset:0;background:rgb(11,5,22);flex-direction:column;align-items:center;justify-content:center;gap:36px;z-index:200;}
+  body.menu-open #site-nav{display:flex !important;position:fixed;inset:0;background:rgb(11,5,22);flex-direction:column;align-items:center;justify-content:center;gap:36px;z-index:200;}
   body.menu-open #site-nav a{font-size:22px !important;padding:8px 16px;}
   body.menu-open #site-header{background:transparent !important;}
 }
