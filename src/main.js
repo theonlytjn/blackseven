@@ -106,17 +106,23 @@ document.addEventListener('click', (e) => {
 })
 
 /* ------------------------------------------------------------------
-   Forms → contact.php (self-hosted PHP mail handler on cPanel)
+   Forms → Web3Forms (https://web3forms.com)
 
-   Any <form data-mailform> is submitted with fetch() to contact.php.
-   The handler emails richard@blackseven.co and replies with JSON:
-     { success: boolean, message: string }
-   A [data-form-status] element inside the form shows the result.
+   Any <form data-mailform> is submitted with fetch() to Web3Forms, a
+   serverless form-to-email API that works on any static host (Cloudflare
+   Pages, GitHub Pages, etc.) — no PHP or backend required.
 
-   NOTE: PHP only runs on the cPanel server (or a local `php -S` server).
-   During `npm run dev` the request will fail gracefully with an error
-   message — the mail actually sends once deployed to public_html.
+   The access key below is a *public* key tied to the Web3Forms account;
+   it's safe to ship in client-side code. The delivery address (where
+   enquiries land) is configured in the Web3Forms dashboard for this key,
+   NOT here. To change the recipient, log in at web3forms.com.
+
+   Web3Forms replies with JSON { success: boolean, message: string } and
+   honours the hidden `botcheck` honeypot already present in each form.
+   A [data-form-status] element inside the form shows the result. During
+   `npm run dev` submissions send for real (the API is reachable in dev).
 ------------------------------------------------------------------ */
+const WEB3FORMS_ACCESS_KEY = 'a15984ae-29fd-45e7-8ecd-a39efc69fb43'
 function setStatus(el, message, ok) {
   if (!el) return
   el.textContent = message
@@ -147,9 +153,21 @@ document.querySelectorAll('form[data-mailform]').forEach((form) => {
     setStatus(statusEl, '', true)
 
     try {
-      const res = await fetch('contact.php', {
+      const formData = new FormData(form)
+      formData.append('access_key', WEB3FORMS_ACCESS_KEY)
+      // Give each enquiry a clear subject line in the inbox.
+      const formType = formData.get('form_type')
+      formData.append(
+        'subject',
+        formType === 'newsletter'
+          ? 'Newsletter signup — Black Seven'
+          : 'Website enquiry — Black Seven'
+      )
+      formData.append('from_name', 'Black Seven Website')
+
+      const res = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: new FormData(form),
+        body: formData,
         headers: { Accept: 'application/json' },
       })
       let data = {}
@@ -162,7 +180,9 @@ document.querySelectorAll('form[data-mailform]').forEach((form) => {
       if (res.ok && data.success) {
         setStatus(
           statusEl,
-          data.message || 'Thanks — your message has been sent.',
+          formType === 'newsletter'
+            ? 'Thanks — you have been added to the list.'
+            : 'Thanks — your message has been sent.',
           true
         )
         form.reset()
